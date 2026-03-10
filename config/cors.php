@@ -6,7 +6,10 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'],
+    'allowed_origins' => [
+        'http://localhost:3000',
+        'https://fitness-club-system.netlify.app'
+    ],
 
     'allowed_origins_patterns' => [],
 
