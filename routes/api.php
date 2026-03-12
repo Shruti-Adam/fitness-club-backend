@@ -201,6 +201,12 @@ Route::get('/reports/revenue',[AdminController::class,'revenueReport']);
 Route::get('/reports/bookings',[AdminController::class,'bookingReport']);
 Route::get('/reports/trainers',[AdminController::class,'trainerReport']);
 
+/* Notifications */
+
+Route::get('/notifications',[AdminController::class,'notifications']);
+Route::get('/notifications/unread',[AdminController::class,'unreadNotifications']);
+Route::post('/notifications/{id}/read',[AdminController::class,'markNotificationRead']);
+
 });
 
 });

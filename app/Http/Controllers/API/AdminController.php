@@ -411,4 +411,41 @@ public function trainerReport()
     return response()->json($data);
 }
 
+/*
+|--------------------------------------------------------------------------
+| ADMIN NOTIFICATIONS
+|--------------------------------------------------------------------------
+*/
+
+public function notifications()
+{
+    return \App\Models\Notification::where('user_id', auth()->id())
+        ->latest()
+        ->get();
+}
+
+public function unreadNotifications()
+{
+    return \App\Models\Notification::where('user_id', auth()->id())
+        ->where('is_read', 0)
+        ->count();
+}
+
+public function markNotificationRead($id)
+{
+    $notification = \App\Models\Notification::where('id', $id)
+        ->where('user_id', auth()->id())
+        ->first();
+
+    if ($notification) {
+        $notification->is_read = 1;
+        $notification->save();
+    }
+
+    return response()->json([
+        "message" => "Notification marked as read"
+    ]);
+}
+
+
 }
