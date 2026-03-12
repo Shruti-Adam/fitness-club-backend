@@ -154,6 +154,9 @@ Route::prefix('admin')->group(function(){
     /* Dashboard */
     Route::get('/dashboard',[AdminController::class,'dashboard']);
 
+    Route::post('/schedules',[ScheduleController::class,'store']);
+    Route::delete('/schedules/{id}',[ScheduleController::class,'destroy']);
+
     /* Trainers */
     Route::get('/trainers',[AdminController::class,'trainers']);
     Route::post('/trainers',[AdminController::class,'storeTrainer']);

@@ -44,7 +44,7 @@ public function store(Request $request)
         'date' => 'required|date',
         'time' => 'required',
         'location' => 'required|string',
-        'capacity' => 'required|integer'
+        'capacity' => 'required|integer|min:1'
     ]);
 
     $images = [
@@ -76,6 +76,7 @@ public function store(Request $request)
         'message' => 'Schedule created successfully',
         'data' => $schedule
     ]);
+
 }
 
 
