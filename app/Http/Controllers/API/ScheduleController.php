@@ -38,9 +38,8 @@ public function index()
 public function store(Request $request)
 {
 
-    $trainer = auth()->user();
-
     $request->validate([
+        'trainer_id' => 'required|exists:users,id',
         'title' => 'required|string',
         'date' => 'required|date',
         'time' => 'required',
@@ -48,34 +47,23 @@ public function store(Request $request)
         'capacity' => 'required|integer'
     ]);
 
-
-    /* CLASS IMAGES */
-
     $images = [
 
         "Morning Yoga" => "https://images.unsplash.com/photo-1599447421416-3414500d18a5",
-
         "Cardio Session" => "https://images.unsplash.com/photo-1558611848-73f7eb4001a1",
-
         "Strength Training" => "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa",
-
         "Zumba" => "https://images.unsplash.com/photo-1518611012118-696072aa579a",
-
         "HIIT Workout" => "https://images.unsplash.com/photo-1599058918144-1ffabb6ab9a0",
-
         "CrossFit" => "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b",
-
         "Personal Training" => "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61",
-
         "Evening Yoga" => "https://images.unsplash.com/photo-1506126613408-eca07ce68773"
 
     ];
 
     $image = $images[$request->title] ?? null;
 
-
     $schedule = Schedule::create([
-        'trainer_id' => $trainer->id,
+        'trainer_id' => $request->trainer_id,
         'title' => $request->title,
         'date' => $request->date,
         'time' => $request->time,
@@ -84,13 +72,11 @@ public function store(Request $request)
         'image' => $image
     ]);
 
-
     return response()->json([
         'message' => 'Schedule created successfully',
         'data' => $schedule
     ]);
 }
-
 
 /*
 |--------------------------------------------------------------------------

@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
 
-    protected $fillable = [
-        "trainer_id",
-        "title",
-        "date",
-        "time",
-        "location",
-        "capacity",
-        "image"
-    ];
+protected $table = "schedules";
+
+protected $fillable = [
+"trainer_id",
+"title",
+"date",
+"time",
+"location",
+"capacity",
+"image"
+];
 
     public function trainer()
     {
